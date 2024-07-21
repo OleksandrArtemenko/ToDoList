@@ -29,7 +29,7 @@ class State:
     def initialize_default_states():
         new_state = State("New")
         in_progress_state = State("In progress")
-        done_state = State("Done")
+        done_state = State("Complete")
 
 
 if __name__ == "__main__":
