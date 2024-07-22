@@ -3,7 +3,6 @@ from tkinter import simpledialog, messagebox
 from ToDo import ToDo
 from State import State
 
-
 class ToDoApp:
     def __init__(self, root):
         self.root = root
@@ -70,11 +69,14 @@ class ToDoApp:
         self.delete_subtask_button = tk.Button(self.root, text="Delete Subtask", command=self.delete_subtask)
         self.delete_subtask_button.pack()
 
+        self.mark_task_complete_button = tk.Button(self.root, text="Mark Task as Complete", command=self.mark_task_as_complete)
+        self.mark_task_complete_button.pack()
+
         self.mark_subtask_complete_button = tk.Button(self.root, text="Mark Subtask as Complete", command=self.mark_subtask_as_complete)
         self.mark_subtask_complete_button.pack()
 
-        self.mark_task_complete_button = tk.Button(self.root, text="Mark Task as Complete", command=self.mark_task_as_complete)
-        self.mark_task_complete_button.pack()
+        self.save_to_file_button = tk.Button(self.root, text="Save ToDo List to File", command=self.save_todo_list)
+        self.save_to_file_button.pack()
 
         self.display_tasks()
 
@@ -172,6 +174,14 @@ class ToDoApp:
             self.todo.update_task(title, self.todo.read_task(title).get_deadline(), self.todo.read_task(title).get_description(), State.get_by_title("Complete"))
             self.display_tasks()  # Refresh the displayed tasks
 
+    def save_todo_list(self):
+        filename = simpledialog.askstring("Input", "Enter filename to save:")
+        if filename:
+            try:
+                self.todo.save_to_file(filename)
+                messagebox.showinfo("Success", f"ToDo list saved to {filename}")
+            except Exception as e:
+                messagebox.showerror("Error", f"Failed to save ToDo list: {e}")
 
 if __name__ == "__main__":
     State.initialize_default_states()
