@@ -11,6 +11,9 @@ class State:
     def __repr__(self):
         return f"status: {self.title}"
 
+    def __str__(self):
+        return self.title
+
     def __eq__(self, other):
         return self.title == other.title
 
@@ -30,11 +33,3 @@ class State:
         new_state = State("New")
         in_progress_state = State("In progress")
         done_state = State("Complete")
-
-
-if __name__ == "__main__":
-    State.initialize_default_states()
-
-    print(State.get_all_states())
-    done_state2 = State("Done")
-    print(State.get_all_states())

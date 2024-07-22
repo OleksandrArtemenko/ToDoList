@@ -84,10 +84,3 @@ class Task:
         for task in cls.__all_tasks:
             if task.get_title() == title:
                 return task
-
-
-
-if __name__ == "__main__":
-    State.initialize_default_states()
-
-

@@ -23,7 +23,10 @@ class ToDo:
         self.__ts.update_task(title, deadline, description, status)
 
     def delete_task(self, title):
-        self.__ts.delete_task(title)
+        task_to_delete = self.__ts.read_task(title)
+        if task_to_delete:
+            self.__tasks.remove(task_to_delete)  # Remove from internal list
+            Task.get_all_tasks().remove(task_to_delete)
 
     def add_subtask_to_task(self, task_title, subtask_title, subtask_status=None):
         self.__ts.add_subtask_to_task(task_title, subtask_title, subtask_status)
